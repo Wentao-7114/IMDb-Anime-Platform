@@ -1,0 +1,20 @@
+# Core Libraries
+numpy==1.22.0
+pandas==1.3.3
+matplotlib==3.4.3
+
+# Frontend Libraries
+Flask==2.0.1
+gradio==2.3.0
+
+# Database Libraries
+psycopg2-binary==2.9.1 
+
+# Machine Learning Libraries
+scikit-learn==1.0
+
+# Data Visualization Libraries
+seaborn==0.11.2 
+
+# Security and User Authentication
+Flask-Security==3.0.0  
