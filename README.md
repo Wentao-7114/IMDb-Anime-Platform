@@ -2,9 +2,17 @@
 
 By Minghao Shi (mshi18), Boqin Yuan (boqiny2), Wentao Zhang (wentaoz4), Jiayin Meng (jiayinm2)
 
+## Pipeline:
+
+### Data scraping:
+
+Use MAL API to scrap the dataset we want to use. We plan to use this API for specific data we want in the future. 
+
+MAL API: https://myanimelist.net/apiconfig/references/api/v2#section/Authentication
+
 ## Pitch
 
-We aim to create an interactive web platform to explore and analyze the IMDb Anime Dataset, offering valuable insights into Japanese anime, catering to enthusiasts, researchers, and professionals. Our user-friendly design simplifies data interpretation, presenting it in an engaging and accessible manner.
+We aim to create an interactive web platform to explore and analyze the IMDb Anime Dataset, offering valuable insights into Japanese anime, and catering to enthusiasts, researchers, and professionals. Our user-friendly design simplifies data interpretation, presenting it in an engaging and accessible manner.
 
 ## Functionality
 
@@ -87,5 +95,4 @@ Adherence to the PEP 8 and Airbnb Style Guides, utilization of pytest, flake8, E
 ## Conclusion
 
 Embark on this journey with us to unveil a comprehensive, insightful, and engaging platform making Japanese anime data accessible and insightful for all!
-
 
