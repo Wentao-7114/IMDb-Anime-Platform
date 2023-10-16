@@ -1,29 +1,12 @@
-
-# Data Cleaning and Preprocessing for anime dataset
-
-import numpy as np
 import pandas as pd
-import seaborn as sb
-import matplotlib.pyplot as plt
+import numpy as np
 import json
 
-sb.set()
-pd.set_option('display.max_columns', None)
+# Load and initially process data
+data = pd.read_csv('./Dataset/anime.csv')
 
-file_path = './Dataset/anime.csv'
-
-# Load Data
-data = pd.read_csv(file_path)
-print("Initial Data: ", data.shape)
-print("Missing values in initial dataframe:")
-print(data.isnull().sum())
-
-# Dropping unnecessary columns
-columns_to_drop = ['main_picture', 'created_at', 'updated_at', 'background']
-data_clean = data.drop(columns=columns_to_drop)
-
-# Handling missing data by filling NA values with a default value or using other techniques like forward-fill, backward-fill, or interpolation
-fill_values = {
+data_clean = data.drop(columns=['main_picture', 'created_at', 'updated_at', 'background'])
+data_clean.fillna({
     "synopsis": "No Synopsis",
     "end_date": "Airing",
     "broadcast": "{'day_of_the_week': 'NIL', 'start_time': 'NIL'}",
@@ -31,27 +14,55 @@ fill_values = {
     "rating": "No Rating",
     "genres": "[{'id': -1, 'name': 'No Genre'}]",
     "mean": -1
-}
+}, inplace=True)
 
-data_clean.fillna(value=fill_values, inplace=True)
+# Utility function to safely parse JSON and handle exceptions
+def parse_json(entry):
+    try:
+        return json.loads(entry.replace("'", "\""))
+    except json.JSONDecodeError:
+        return None
 
-# Data transformation functions
-def split_json_column(df, column, keys):
-    df[keys] = df[column].apply(lambda x: pd.Series(json.loads(str(x).replace("'", "\"")))[keys])
-    df.drop(columns=[column], inplace=True)
+# Split JSON fields into separate columns
+def split_json_fields(data_clean):
+    for index, row in data_clean.iterrows():
+        for col in ['start_season', 'broadcast', 'statistics', 'studios', 'genres']:
+            json_data = parse_json(row[col])
+            
+            if isinstance(json_data, dict):
+                for key, value in json_data.items():
+                    if isinstance(value, dict):  # Handling nested dictionaries
+                        for subkey, subvalue in value.items():
+                            data_clean.at[index, f'{col}_{key}_{subkey}'] = subvalue
+                    else:
+                        data_clean.at[index, f'{col}_{key}'] = value
+            elif isinstance(json_data, list):  # Handling the case where the JSON data is a list
+                data_clean.at[index, f'{col}'] = ", ".join([str(item) for item in json_data])
 
-def split_statistics(df):
-    keys = ['watching', 'completed', 'on_hold', 'dropped', 'plan_to_watch']
-    stats = df['statistics'].apply(lambda x: pd.Series(json.loads(str(x).replace("'", "\""))['status'])[keys])
-    stats.columns = ['statistics_' + col for col in keys]
-    return pd.concat([df, stats], axis=1).drop(columns=['statistics'])
+    data_clean.drop(columns=['start_season', 'broadcast', 'statistics', 'studios', 'genres'], inplace=True)
 
-# Apply transformations
-split_json_column(data_clean, 'start_season', ['year', 'season'])
-split_json_column(data_clean, 'broadcast', ['day_of_the_week', 'start_time'])
-data_clean = split_statistics(data_clean)
+# Compute positive and negative viewership fractions
+def compute_viewership_fractions(data_clean):
+    cols_to_numeric = [
+        'statistics_num_list_users', 'statistics_status_watching', 'statistics_status_completed',
+        'statistics_status_on_hold', 'statistics_status_dropped', 'statistics_status_plan_to_watch'
+    ]
+    data_clean[cols_to_numeric] = data_clean[cols_to_numeric].apply(pd.to_numeric, errors='coerce')
 
-print("Cleaned Data: ", data_clean.shape)
-print("Missing values in cleaned dataframe:")
-print(data_clean.isnull().sum())
+    positive_cols = ['statistics_status_watching', 'statistics_status_completed', 'statistics_status_plan_to_watch']
+    negative_cols = ['statistics_status_on_hold', 'statistics_status_dropped']
 
+    data_clean['positive_viewership'] = data_clean[positive_cols].sum(axis=1)
+    data_clean['negative_viewership'] = data_clean[negative_cols].sum(axis=1)
+
+    data_clean['positive_viewership_fraction'] = data_clean['positive_viewership'] / data_clean['statistics_num_list_users']
+    data_clean['negative_viewership_fraction'] = data_clean['negative_viewership'] / data_clean['statistics_num_list_users']
+
+    data_clean.drop(columns=['positive_viewership', 'negative_viewership'], inplace=True)
+
+# Main processing
+split_json_fields(data_clean)
+compute_viewership_fractions(data_clean)
+
+# Saving the cleaned data to a CSV file
+data_clean.to_csv('./Dataset/cleaned_data.csv', index=False)
