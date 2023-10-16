@@ -1,14 +1,12 @@
-import gradio as gr
+from flask import Flask, jsonify
+import pandas as pd
 
-def predict_anime_rating(features):
-    # Your predictive model logic here
-    predicted_rating = model.predict([features])
-    return predicted_rating
+app = Flask(__name__)
 
-iface = gr.Interface(
-    fn=predict_anime_rating,
-    inputs="text",
-    outputs="text"
-)
+@app.route('/api/data', methods=['GET'])
+def get_data():
+    data = pd.read_csv('./Dataset/cleaned_data.csv')
+    return jsonify(data.to_dict(orient='records'))
 
-iface.launch()
+if __name__ == "__main__":
+    app.run(debug=True)
