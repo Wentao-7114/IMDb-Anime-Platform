@@ -1,3 +1,102 @@
+// design the login and log out page without the backend
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom"
+
+function Login(props) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [usernameerror, setUsernameerror] = useState('');
+    const [passworderror, setPassworderror] = useState('');
+
+    const navigate = useNavigate();
+    const onButtonClick = () => {
+        setPassworderror("")
+        setUsernameerror("")
+        if (password.length < 7) {
+            setPassworderror("The Length must be 8 characters or more")
+            return
+        }
+        if (""== password) {
+            setPassworderror('Please enter a password')
+            return
+        }
+        if ("" == username) {
+            setUsernameerror("Please enter a username")
+            return
+        }
+        if (!/^[a-zA-Z0-9]{3,}$/.test(username)) {   // password should be at least three character
+            setUsernameerror("Please enter a valid username")
+            return
+        }
+    }
+    const onButtonClick2 = () => {
+        navigate('/')
+    }
+    return <div className={"mainContainer"}>
+        <div className={"titleContainer"}>
+            <div>Login</div>
+        </div>
+        <br />
+        <div className={"inputContainer"}>
+            <input
+                value={username}
+                placeholder="Enter your username here"
+                onChange={ev => setUsername(ev.target.value)}
+                className={"inputBox"} />
+            <label className="errorLabel">{usernameerror}</label>
+        </div>
+        <br />
+        <div className={"inputContainer"}>
+            <input
+                value={password}
+                placeholder="Enter your password here"
+                onChange={ev => setPassword(ev.target.value)}
+                className={"inputBox"} />
+            <label className="errorLabel">{passworderror}</label>
+        </div>
+        <br />
+        <div className={"inputContainer"}>
+            <input
+                className={"inputButton"}
+                type="button"
+                onClick={onButtonClick}
+                value={"Log in"} />
+            <input
+                className={"inputButton"}
+                type="button"
+                onClick={onButtonClick2}
+                value={"Back"} />
+        </div>
+    </div>
+}
+
+export default Login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import React, { useState } from 'react'; 
 // import axios from 'axios';
 // function Login(props) {
@@ -96,56 +195,56 @@
 
 
 
-import React, { useState } from 'react'; 
-import axios from 'axios';
+// import React, { useState } from 'react'; 
+// import axios from 'axios';
 
-function App() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+// function App() {
+//     const [username, setUsername] = useState('');
+//     const [password, setPassword] = useState('');
 
-    const registerUser = async () => {
-        try {
-            const response = await axios.post('http://localhost:3001/api/register', {
-                username: username,
-                password: password
-            }); 
+//     const registerUser = async () => {
+//         try {
+//             const response = await axios.post('http://localhost:3001/api/register', {
+//                 username: username,
+//                 password: password
+//             }); 
 
-            if (response.status === 201) {
-                alert('Registration successful');
-            } else {
-                alert('Registration failed');
-            }
-        } catch (error) {
-            alert('Error during registration');
-        }
-    };
+//             if (response.status === 201) {
+//                 alert('Registration successful');
+//             } else {
+//                 alert('Registration failed');
+//             }
+//         } catch (error) {
+//             alert('Error during registration');
+//         }
+//     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        registerUser();
-    };
+//     const handleSubmit = (event) => {
+//         event.preventDefault();
+//         registerUser();
+//     };
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="text" 
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-                <input 
-                    type="password" 
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Register</button>
-            </form>
-        </div>
-    );
-}
+//     return (
+//         <div>
+//             <form onSubmit={handleSubmit}>
+//                 <input 
+//                     type="text" 
+//                     placeholder="Username"
+//                     value={username}
+//                     onChange={(e) => setUsername(e.target.value)}
+//                     required
+//                 />
+//                 <input 
+//                     type="password" 
+//                     placeholder="Password"
+//                     value={password}
+//                     onChange={(e) => setPassword(e.target.value)}
+//                     required
+//                 />
+//                 <button type="submit">Register</button>
+//             </form>
+//         </div>
+//     );
+// }
 
-export default App;
+// export default App;
