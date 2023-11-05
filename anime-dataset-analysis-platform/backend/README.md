@@ -3,6 +3,17 @@ We connect to the Cloud Server using [The Cloud SQL Node.js Connector](https://g
 
 Check this [Github](https://github.com/GoogleCloudPlatform/nodejs-docs-samples/tree/5ae41d635ea99d0c2d101c365aa5c3f1d8fd1f5c/cloud-sql/sqlserver/tedious) to see the official example.
 
+## You might need to set up default credentials first
+https://cloud.google.com/docs/authentication/provide-credentials-adc
+
+For local development environment,
+1. Install and initialize the gcloud CLI
+2. Create your credentail file:
+   ```
+   gcloud auth application-default login
+   ```
+
+
 ## Running locally
 
 To run the server locally using the Cloud SQL Node.js Connector, set
