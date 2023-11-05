@@ -105,7 +105,7 @@ app.use(async (req, res, next) => {
   }
 });
 
-// Handle incoming vote requests and inserting them into the database.
+// Handle incoming user info and inserting them into the database.
 const httpPost = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -131,6 +131,6 @@ const httpPost = async (req, res) => {
   res.status(201).send("User registered successfully").end();
 };
 
-app.post('*', httpPost);
+app.post('/api/register', httpPost);
 
 module.exports.app = app;
