@@ -19,6 +19,14 @@ const Home = (props) => {
             navigate("/Login")
         }
     }
+    const onButtonClick2 = () => {
+        if (loggedIn) {
+            localStorage.removeItem("user")
+            props.setLoggedIn(false)
+        } else {
+            navigate("/Register")
+        }
+    }
 
     return <div className="mainContainer">
         <div className={"titleContainer"}>
@@ -26,6 +34,13 @@ const Home = (props) => {
         </div>
         <div>
             This is the home page.
+        </div>
+        <div className={"inputContainer"}>
+            <input
+                className={"inputButton"}
+                type="button"
+                onClick={onButtonClick2}
+                value={"Register"} />
         </div>
         <div className={"buttonContainer"}>
             <input

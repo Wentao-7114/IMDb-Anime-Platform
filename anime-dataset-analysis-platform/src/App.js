@@ -48,6 +48,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import Login from './Login';
 import Home from './Home';
+import Register from './Register';
 import './App.css';
 import  { useState, useEffect } from 'react';
 
@@ -60,6 +61,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home username={username} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
           <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} setEmail={setUsername} />} />
+          <Route path="/Register" element={<Register />} />
         </Routes>
       </BrowserRouter>    
     
