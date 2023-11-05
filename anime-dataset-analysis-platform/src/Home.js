@@ -19,8 +19,7 @@ const Home = (props) => {
             navigate("/Login")
         }
     }
-
-    const onRegisterButtonClick = () => {
+    const onButtonClick2 = () => {
         if (loggedIn) {
             localStorage.removeItem("user")
             props.setLoggedIn(false)
@@ -36,18 +35,18 @@ const Home = (props) => {
         <div>
             This is the home page.
         </div>
+        
         <div className={"buttonContainer"}>
+        <input
+                className={"inputButton"}
+                type="button"
+                onClick={onButtonClick2}
+                value={"Register"} />
             <input
                 className={"inputButton"}
                 type="button"
                 onClick={onButtonClick}
                 value={loggedIn ? "Log out" : "Log in"} />
-            
-            <input
-                className={"inputButton"}
-                type="button"
-                onClick={onRegisterButtonClick}
-                value={"Register"} />
 
             {(loggedIn ? <div>
                 Your user account is {username}
