@@ -56,15 +56,14 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false); // user not log in
   const [username, setUsername] = useState("")
   return (
-    <div className="App">
+    <div className="App login-background"> {/* Add the background class here */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home username={username} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
-          <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} setEmail={setUsername} />} />
+          <Route path="/Login" element={<div className="login-form"><Login setLoggedIn={setLoggedIn} setEmail={setUsername} /></div>} /> {/* Wrap Login with a styled div */}
           <Route path="/Register" element={<Register />} />
         </Routes>
       </BrowserRouter>    
-    
     </div>
   );
 }

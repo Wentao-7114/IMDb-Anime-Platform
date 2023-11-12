@@ -54,3 +54,59 @@
   flex-direction: column;
   align-items: center;
 }
+
+/*home page background */
+.login-background {
+  background-image: url('../images/image_bg.jpg'); 
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Styles for centering and styling the register form */
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+}
+
+.register-form input,
+.register-form button {
+  width: 300px; /* Larger width */
+  padding: 10px; /* More padding for better visuals */
+  margin: 10px 0; /* Spacing between fields */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Larger font size */
+}
+
+.register-form button {
+  background-color: #4CAF50; /* Example button color */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.register-form button:hover {
+  background-color: #45a049; /* Slightly darker on hover */
+}
+
+/* Style for the new user prompt */
+.new-user-prompt {
+  margin-bottom: 20px;
+  font-size: 60px;
+  color: #333;
+  /* Add more styling as needed */
+}
+
+/* Style for the login redirect button */
+.redirect-login-btn {
+  margin-top: 20px;
+  background-color: transparent;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 16px;
+}
