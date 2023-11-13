@@ -106,7 +106,7 @@ app.use(async (req, res, next) => {
 });
 
 // Handle incoming user info and inserting them into the database.
-const httpPost = async (req, res) => {
+const registerPost = async (req, res) => {
   const { username, password } = req.body;
   try {
     const query = "INSERT INTO UserInfo (username, password) VALUES (@username, @password)";
@@ -131,6 +131,51 @@ const httpPost = async (req, res) => {
   res.status(201).send("User registered successfully").end();
 };
 
-app.post('/api/register', httpPost);
+app.post('/api/register', registerPost);
+
+
+const getAnimeTitles = async (req, res) => {
+  try {
+    const query = "SELECT  top 10 title, (JSON_VALUE(replace(main_picture, '''', '\"'), '$.medium')) as url  FROM animeinfo_2000;  ";
+    const result = await connection.query(query);
+    res.status(200).json(result);
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("Internal Server Error").end(); 
+  }
+};
+
+app.get('/api/getAnimeInfo', getAnimeTitles);
+
+
+
+const loginPost = async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+      // Query to check if a user with the provided username and password exists
+      const query = "SELECT * FROM UserInfo WHERE username = @username AND password = @password";
+
+      const result = await connection.query(query, [
+          ['username', username],
+          ['password', password]
+      ]);
+
+      // Check if user exists
+      if (result.length > 0) {
+          // User found with matching username and password
+          res.status(200).send("Login successful").end();
+      } else {
+          // User not found or password incorrect
+          res.status(401).send("Invalid credentials").end();
+      }
+  } catch (err) {
+      // Handle any errors that occur during the query
+      logger.error(connection.TYPES, err);
+      res.status(500).send("Internal Server Error").end();
+  }
+};
+
+app.post('/api/login', loginPost);
 
 module.exports.app = app;

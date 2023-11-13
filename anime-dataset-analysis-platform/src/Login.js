@@ -1,7 +1,7 @@
 // design the login and log out page without the backend
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom"
-
+import axios from 'axios';
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,10 +12,7 @@ function Login(props) {
     const onButtonClick = () => {
         setPassworderror("")
         setUsernameerror("")
-        if (password.length < 7) {
-            setPassworderror("The Length must be 8 characters or more")
-            return
-        }
+        
         if (""== password) {
             setPassworderror('Please enter a password')
             return
@@ -28,10 +25,21 @@ function Login(props) {
             setUsernameerror("Please enter a valid username")
             return
         }
+        axios.post('http://localhost:3001/api/login', { username:username, password:password })
+            .then(response => {
+                console.log(response.data); // Login successful
+                navigate('/mainpage');
+            })
+            .catch(error => {
+                console.error('Error:', error.response.data.message);
+                
+                // Handle login failure (e.g., set an error state and display it)
+            }); 
     }
     const onButtonClick2 = () => {
         navigate('/')
     }
+
     return <div className={"mainContainer"}>
         <div className={"titleContainer"}>
             <div>Login</div>

@@ -56,10 +56,11 @@
 }
 
 /*home page background */
-.login-background {
+body {
   background-image: url('../images/image_bg.jpg'); 
   background-size: cover;
   background-position: center;
+  background-attachment: fixed; /* Makes the background fixed */
   height: 100vh; /* Full viewport height */
 }
 

@@ -1,0 +1,25 @@
+/* Searching.css */
+.animeList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: flex-start;
+    }
+    
+.animeItem {
+width: 20%;
+margin: 1%;
+text-align: center;
+ 
+}
+
+.animeItem img {
+width: 100%;
+height: auto;
+margin-bottom: 10px;
+}
+.animeItem h3 {
+      font-size: 24px; /* Increase the font size */
+      color: #7fb0e4; /* Change the font color */
+      /* Add any other styling as needed */
+    }
