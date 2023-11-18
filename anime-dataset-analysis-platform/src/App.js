@@ -48,10 +48,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import Login from './Login';
 import Home from './Home';
-import Mainpage from './mainpage';
+import Mainpage from './pages/mainpage';
 import Register from './Register';
-import Searching from './Searching';
-import Aboutme from './Aboutme';
+import Searching from './pages/Searching';
+import Aboutme from './pages/Aboutme';
 import './App.css';
 import  { useState, useEffect } from 'react';
 
@@ -66,9 +66,9 @@ function App() {
           <Route path="/mainpage" element={< Mainpage/>} />
           <Route path="/Login" element={<div className="login-form"><Login setLoggedIn={setLoggedIn} setEmail={setUsername} /></div>} /> {/* Wrap Login with a styled div */}
           <Route path="/Register" element={<Register />} />
-          <Route path='/Searching' element={<Searching />} />
+          <Route path='/mainpage/Searching' element={<Searching />} />
           {/* <Route path='/pokemon/:name' element={<PokemonDetailsPage/>} /> */}
-          <Route path="/Aboutme" element={<Aboutme />} />
+          <Route path="/mainpage/Aboutme" element={<Aboutme />} />
         </Routes>
       </BrowserRouter>    
     </div>

@@ -28,7 +28,7 @@ function Login(props) {
         axios.post('http://localhost:3001/api/login', { username:username, password:password })
             .then(response => {
                 console.log(response.data); // Login successful
-                navigate('/mainpage');
+                navigate('/mainpage', {state:{currentusername:username, currentpassword:password}});
             })
             .catch(error => {
                 console.error('Error:', error.response.data.message);
