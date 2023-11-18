@@ -21,7 +21,7 @@ const SearchBar = ({ data, setFilteredData }) => {
     <form onSubmit={handleSearchSubmit}>
       <input
         type="text"
-        placeholder="Enter a Anime Name..."
+        placeholder="Enter an Anime Name..."
         value={searchQuery}
         onChange={handleSearchInputChange}
       />
