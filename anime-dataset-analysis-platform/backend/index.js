@@ -212,17 +212,17 @@ app.post('/api/getUserId', async (req, res) => {
     // Add logic to hash the password and compare with the hashed password in the database
     // For simplicity, using plaintext comparison (not recommended for production)
     const query = "SELECT userId FROM UserInfo WHERE UserName = @username AND Password = @password";
-    console.log(query);
+    
     const result = await connection.query(query, [
       ['username', username],
       ['password', password]
   ]);
  
-    console.log(result[0].userId.value );
+   
   
     if (result.length > 0) {
       res.json({ userId: result[0].userId.value });
-      console.log(2222222);
+     
     } else {
       res.status(401).send("Invalid credentials");
     }
@@ -232,8 +232,34 @@ app.post('/api/getUserId', async (req, res) => {
   }
 });
 
+const getFavoriteAnime = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    console.log("UserId received: ", userId);
+
+    const query = `
+      SELECT distinct  id, title, JSON_VALUE(replace(main_picture, '''', '"'), '$.medium') as url
+      FROM FavoriteList f
+      LEFT OUTER JOIN animeinfo_2000 a ON f.AnimeId = a.id
+      WHERE f.userid =  ` + userId;
+
+     
+ 
+
+    const result = await connection.query(query);
+
+     
+    res.status(200).json(result);
+  } catch (err) {
+    console.error("Error in getFavoriteAnime: ", err);
+    res.status(500).send("Internal Server Error").end();
+  }
+};
 
 
+
+// Register the route
+app.get('/api/getFavoriteAnime/:userId', getFavoriteAnime);
 
 
 module.exports.app = app;
