@@ -57,7 +57,7 @@
 
 /*home page background */
 body {
-  background-image: url('../images/image_bg.jpg'); 
+  background-image: url('../src/images/image_bg.jpg'); 
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Makes the background fixed */
