@@ -34,11 +34,11 @@ Create Table UserInfo (
 
 Drop Table if exists FavoriteList;
 Create Table FavoriteList (
-	ListId smallint not null,
+	ListId smallint identity(1,1) not null,
 	Constraint PK_ListId primary key (ListId),
 
-	UserId smallint not null,
-	ListName Nvarchar(100) not null,
+	UserId Nvarchar(100) not null,
+	 
 	AnimeId Nvarchar(100) not null
 
 );

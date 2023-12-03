@@ -9,6 +9,11 @@ function Aboutme() {
   let location = useLocation();
   const username = location.state.currentusername;
   const password = location.state.currentpassword;
+
+
+
+
+  
  
   return (
     <div>

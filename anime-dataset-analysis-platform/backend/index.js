@@ -137,7 +137,7 @@ app.post('/api/register', registerPost);
 
 const getAnimeTitles = async (req, res) => {
   try {
-    const query = "SELECT  top 10 title, (JSON_VALUE(replace(main_picture, '''', '\"'), '$.medium')) as url  FROM animeinfo_2000;  ";
+    const query = "SELECT  top 10 id, title, (JSON_VALUE(replace(main_picture, '''', '\"'), '$.medium')) as url  FROM animeinfo_2000;  ";
     const result = await connection.query(query);
     res.status(200).json(result);
   } catch (err) {
@@ -178,5 +178,62 @@ const loginPost = async (req, res) => {
 };
 
 app.post('/api/login', loginPost);
+
+
+const addToFavorites = async (req, res) => {
+  const { userId, animeId } = req.body;
+  try {
+ 
+    // Ensure that userId is an integer
+    const userIdInt = parseInt(userId, 10);
+    if (isNaN(userIdInt)) {
+      return res.status(400).send("Invalid userId");
+    } 
+   
+    const query = "INSERT INTO FavoriteList (UserId, AnimeId) VALUES ("+ userId +", "+ animeId +")";
+     
+    await connection.query(query );
+ 
+    res.status(201).send("Anime added to favorites successfully").end();
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("Internal Server Error").end(); 
+  }
+};
+
+app.post('/api/addToFavorites', addToFavorites);
+
+
+
+app.post('/api/getUserId', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Add logic to hash the password and compare with the hashed password in the database
+    // For simplicity, using plaintext comparison (not recommended for production)
+    const query = "SELECT userId FROM UserInfo WHERE UserName = @username AND Password = @password";
+    console.log(query);
+    const result = await connection.query(query, [
+      ['username', username],
+      ['password', password]
+  ]);
+ 
+    console.log(result[0].userId.value );
+  
+    if (result.length > 0) {
+      res.json({ userId: result[0].userId.value });
+      console.log(2222222);
+    } else {
+      res.status(401).send("Invalid credentials");
+    }
+  } catch (err) {
+    // console.error(err);
+    // res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
+
 
 module.exports.app = app;
