@@ -91,6 +91,7 @@ useEffect(() => {
     })
     .then(response => {
       // Handle successful addition
+      alert('successfully added to your favorite list!')
       console.log('Added to favorites:', response.data);
     })
     .catch(error => {
