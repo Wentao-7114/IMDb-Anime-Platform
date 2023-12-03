@@ -103,7 +103,7 @@ useEffect(() => {
   return (
     <div>
       <Navbar value={{currentusername:username, currentpassword:password}}></Navbar>
-      <h1>Searchinccg</h1>
+      <h1>Searching</h1>
       <SearchBar data={animes} setFilteredData={setFilteredData} />
       <div className="animeList">
         {filteredAnimes.map((item, index) => (
