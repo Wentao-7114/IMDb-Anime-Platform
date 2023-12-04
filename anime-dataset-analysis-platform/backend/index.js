@@ -183,17 +183,13 @@ app.post('/api/login', loginPost);
 const addToFavorites = async (req, res) => {
   const { userId, animeId } = req.body;
   try {
- 
     // Ensure that userId is an integer
     const userIdInt = parseInt(userId, 10);
     if (isNaN(userIdInt)) {
       return res.status(400).send("Invalid userId");
     } 
-   
     const query = "INSERT INTO FavoriteList (UserId, AnimeId) VALUES ("+ userId +", "+ animeId +")";
-     
     await connection.query(query );
- 
     res.status(201).send("Anime added to favorites successfully").end();
   } catch (err) {
     logger.error(err);
@@ -202,6 +198,30 @@ const addToFavorites = async (req, res) => {
 };
 
 app.post('/api/addToFavorites', addToFavorites);
+
+
+
+
+const deleteFromFavorites = async (req, res) => {
+  const { userId, animeId } = req.body;
+  try {
+    // Ensure that userId is an integer
+    const userIdInt = parseInt(userId, 10);
+    if (isNaN(userIdInt)) {
+      return res.status(400).send("Invalid userId");
+    } 
+    const query = "Delete From FavoriteList where UserId = "+ userId + "  And AnimeId = "+ animeId ; 
+    await connection.query(query );
+    res.status(201).send("Anime deleted from favorites successfully").end();
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("Internal Server Error").end(); 
+  }
+};
+
+app.post('/api/deleteFromFavorites', deleteFromFavorites);
+
+
 
 
 

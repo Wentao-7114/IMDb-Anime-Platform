@@ -84,23 +84,23 @@ useEffect(() => {
 }, [username, password]); // Depend on username and password
 
  console.log(userId);
-  const addToFavorites = (userId, animeId) => {
-    axios.post('http://localhost:3001/api/addToFavorites', {
-      userId: userId,
-      animeId: animeId
-    })
-    .then(response => {
-      // Handle successful addition
-      alert('successfully added to your favorite list!')
-      console.log('Added to favorites:', response.data);
-    })
-    .catch(error => {
-      // Handle error
-      console.log(userId);
-      console.log(animeId);
-      console.error('Error adding to favorites:', error);
-    });
-  };
+const addToFavorites = (userId, animeId) => {
+  axios.post('http://localhost:3001/api/addToFavorites', {
+    userId: userId,
+    animeId: animeId
+  })
+  .then(response => {
+    // Handle successful addition
+    alert('successfully added to your favorite list!')
+    console.log('Added to favorites:', response.data);
+  })
+  .catch(error => {
+    // Handle error
+    console.log(userId);
+    console.log(animeId);
+    console.error('Error adding to favorites:', error);
+  });
+};
   return (
     <div>
       <Navbar value={{currentusername:username, currentpassword:password}}></Navbar>

@@ -85,21 +85,21 @@ useEffect(() => {
 }, [username, password]); // Depend on username and password
 
  console.log(userId);
-  const addToFavorites = (userId, animeId) => {
-    axios.post('http://localhost:3001/api/addToFavorites', {
+  const deleteFromFavorites = (userId, animeId) => {
+    axios.post('http://localhost:3001/api/deleteFromFavorites', {
       userId: userId,
       animeId: animeId
     })
     .then(response => {
       // Handle successful addition
-      alert('successfully added to your favorite list!')
-      console.log('Added to favorites:', response.data);
+      alert('successfully deleted from your favorite list!')
+      console.log('delete from favorites:', response.data);
     })
     .catch(error => {
       // Handle error
       console.log(userId);
       console.log(animeId);
-      console.error('Error adding to favorites:', error);
+      console.error('Error deleting from favorites:', error);
     });
   };
   return (
@@ -112,8 +112,8 @@ useEffect(() => {
           <div key={index} className="animeItem">
             <h3>{item.title.value}</h3>
             <img src={item.url.value} alt={item.title.value} />
-            <button className="add-to-fav-btn" onClick={() => addToFavorites(userId, item.id.value)}>
-            Add to Favorites
+            <button className="delete-from -fav-btn" onClick={() => deleteFromFavorites(userId, item.id.value)}>
+            Delete
           </button>
           </div>
         ))}
