@@ -7,7 +7,6 @@ import axios from 'axios';
 import './Searching.css'; // Importing the CSS file
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
-import stringToList from '../components/stringToList';
 
 function Searching() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
