@@ -58,6 +58,7 @@ import  { useState, useEffect } from 'react';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false); // user not log in
   const [username, setUsername] = useState("")
+  
   return (
     <div className="App login-background"> {/* Add the background class here */}
       <BrowserRouter>

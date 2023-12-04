@@ -15,6 +15,7 @@ function Navbar(props) {
       <Link to="/mainpage" state={{currentusername:username, currentpassword:password}}> Home </Link>
           <Link to="/mainpage/Searching" state={{currentusername:username, currentpassword:password}}> Search </Link>
           <Link to="/mainpage/Aboutme" state={{currentusername:username, currentpassword:password}}> AboutMe </Link>
+          <Link to="/ ">Log out</Link>
       </div>
     </div>
     

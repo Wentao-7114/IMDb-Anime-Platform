@@ -14,7 +14,7 @@
     }
     
     .Header {
-      background-color: #282c34;
+  
       
       display: flex;
       flex-direction: column;
@@ -58,8 +58,7 @@
       width: 150px;
       height: 50px;
       margin: 10px;
-      font-size: 15px;
-      background-color: rgb(122, 241, 175);
+      font-size: 15px; 
     }
     
     .list:hover{
@@ -81,22 +80,9 @@
       cursor: pointer;
     }
     
-    .active-button {
-      background-color: #4caf50; /* Set active button background color */
-      color: white; /* Set active button text color */
-      width: 150px;
-      height: 50px;
-      margin: 10px;
-      font-size: 15px;
-    }
+ 
      
     
-    .Header {
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      padding: 10px;
-    }
     
     .Nav {
       font-size: 30px;
