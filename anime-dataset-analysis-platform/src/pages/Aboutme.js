@@ -105,7 +105,7 @@ useEffect(() => {
   return (
     <div>
       <Navbar value={{currentusername:username, currentpassword:password}}></Navbar>
-      <h1>Searching</h1>
+      <h1>Favorite List</h1>
       <SearchBar data={animes} setFilteredData={setFilteredData} />
       <div className="animeList">
         {filteredAnimes.map((item, index) => (
@@ -113,7 +113,7 @@ useEffect(() => {
             <h3>{item.title.value}</h3>
             <img src={item.url.value} alt={item.title.value} />
             <button className="delete-from -fav-btn" onClick={() => deleteFromFavorites(userId, item.id.value)}>
-            Delete
+            Delete It
           </button>
           </div>
         ))}

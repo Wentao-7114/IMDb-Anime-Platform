@@ -137,7 +137,7 @@ app.post('/api/register', registerPost);
 
 const getAnimeTitles = async (req, res) => {
   try {
-    const query = "SELECT  top 10 id, title, (JSON_VALUE(replace(main_picture, '''', '\"'), '$.medium')) as url  FROM animeinfo_2000;  ";
+    const query = "SELECT  id, title, (JSON_VALUE(replace(main_picture, '''', '\"'), '$.medium')) as url  FROM animeinfo_2000;  ";
     const result = await connection.query(query);
     res.status(200).json(result);
   } catch (err) {
