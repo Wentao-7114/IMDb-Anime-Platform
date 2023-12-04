@@ -7,6 +7,9 @@ IMDb Anime Dataset Platform is an online database of anime-related information. 
 
 For more details, please view our project proposal [here](https://docs.google.com/document/d/1Po8U-SgywcwDFIAYKNRANwdWjj6rEpnyhtdZcU9oOjE/edit?usp=sharing)
 
+## Technical architecture
+
+
 
 ## Pipeline:
 
