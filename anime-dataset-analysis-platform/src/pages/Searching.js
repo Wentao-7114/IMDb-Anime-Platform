@@ -1,5 +1,7 @@
 // Searching.js
 import React, { useState, useEffect } from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './Searching.css'; // Importing the CSS file
@@ -101,6 +103,7 @@ const addToFavorites = (userId, animeId) => {
     console.error('Error adding to favorites:', error);
   });
 };
+
   return (
     <div>
       <Navbar value={{currentusername:username, currentpassword:password}}></Navbar>
@@ -113,7 +116,35 @@ const addToFavorites = (userId, animeId) => {
             <img src={item.url.value} alt={item.title.value} />
             <button className="add-to-fav-btn" onClick={() => addToFavorites(userId, item.id.value)}>
             Add to Favorites
-          </button>
+          </button >
+            <Popup trigger=
+                  {<button className="add-to-fav-btn"> More details </button>} 
+                  modal nested>
+                  {
+                      close => (
+                          <div className='modal'>
+                              <div>
+                                  <button className="close-button" onClick=
+                                      {() => close()}>
+                                          X
+                                  </button>
+                              </div>
+                              <div className='content'>
+                                  <h3>{item.title.value}</h3>
+                                    <div className='container'>
+                                      <img src={item.url.value} alt={item.title.value} />
+                                      <p>
+                                        Rating: {item.mean.value}
+
+                                      </p>
+                                  
+                                  </div>
+                              </div>
+                              
+                          </div>
+                      )
+                  }
+              </Popup>
           </div>
         ))}
       </div>

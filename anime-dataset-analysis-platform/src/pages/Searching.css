@@ -13,6 +13,10 @@ text-align: center;
  
 }
 
+.modal {
+  background-color: black;
+}
+
 .animeItem img {
 width: 100%;
 height: auto;
@@ -23,3 +27,48 @@ margin-bottom: 10px;
       color: #7fb0e4; /* Change the font color */
       /* Add any other styling as needed */
     }
+
+.content {
+  color: white;
+  
+}
+.content h3 {
+  font-size: 30px; /* Increase the font size */
+  align-content: center;
+  text-align: center;
+  color: beige; 
+}
+.container {
+  display: flex;
+  align-items: center;
+}
+.container img{
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.container p {
+  color: beige;
+  font-size: 20px;
+  text-decoration: beige;
+  margin-left: 35px;
+}
+
+.add-to-fav-btn {
+  background-color: #7fb0e4;
+  border: 0;
+  opacity: 0.8;
+  box-shadow: 2px 2px;
+}
+
+.delete-from-fav-btn {
+  background-color: #7fb0e4;
+  border: 0;
+  opacity: 0.8;
+  box-shadow: 2px 2px;
+}
+
+.close-button {
+  background-color: white;
+  width:auto;
+  height:auto
+}

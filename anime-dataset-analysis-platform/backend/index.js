@@ -137,7 +137,7 @@ app.post('/api/register', registerPost);
 
 const getAnimeTitles = async (req, res) => {
   try {
-    const query = "SELECT  id, title, (JSON_VALUE(replace(main_picture, '''', '\"'), '$.medium')) as url  FROM animeinfo_2000;  ";
+    const query = "SELECT  id, title, (JSON_VALUE(replace(main_picture, '''', '\"'), '$.medium')) as url, mean  FROM animeinfo_2000;  ";
     const result = await connection.query(query);
     res.status(200).json(result);
   } catch (err) {
@@ -258,7 +258,7 @@ const getFavoriteAnime = async (req, res) => {
     console.log("UserId received: ", userId);
 
     const query = `
-      SELECT distinct  id, title, JSON_VALUE(replace(main_picture, '''', '"'), '$.medium') as url
+      SELECT distinct  id, title, JSON_VALUE(replace(main_picture, '''', '"'), '$.medium') as url, mean
       FROM FavoriteList f
       LEFT OUTER JOIN animeinfo_2000 a ON f.AnimeId = a.id
       WHERE f.userid =  ` + userId;
