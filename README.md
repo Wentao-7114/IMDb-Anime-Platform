@@ -1,5 +1,7 @@
 # IMDb Anime Dataset Analysis Platform
-By Minghao Shi (mshi18), Boqin Yuan (boqiny2), Wentao Zhang (wentaoz4), Jiayin Meng (jiayinm2)
+This is a full stack web application project I made with my friends Jiayin Meng, Minghao Shi and Boqin Yuan.
+
+Video related to our project:   https://mediaspace.illinois.edu/media/t/1_tsjc3l00
 
 ## Introduction:
 IMDb Anime Dataset Platform is an online database of anime-related information. The users could register their account and log in to the platform to search for the anime they want to watch and see the details (e.g. rating) of the anime. If the users love some specific anime, they could add them to their favorites so that they can check this anime later in their favorite anime list without searching.
@@ -7,10 +9,10 @@ IMDb Anime Dataset Platform is an online database of anime-related information. 
 For more details, please view our project proposal [here](https://docs.google.com/document/d/1Po8U-SgywcwDFIAYKNRANwdWjj6rEpnyhtdZcU9oOjE/edit?usp=sharing)
 
 ## Group Members and Roles:
-- **Wentao Zhang:** Frontend Development, Database Management
-- **Jiayin Meng:** Backend Development
-- **Minghao Shi:** Data Processing
-- **Boqin Yuan:** Machine Learning
+- **Wentao Zhang:** Frontend/Backend Development, Database Management
+- **Jiayin Meng:** Frontend/Backend Development
+- **Minghao Shi:** Frontend Development, Data Processing
+- **Boqin Yuan:** Data Processing, Machine Learning
 
 ## Technical architecture:
 ![Techincal Architecture](technical_architecture.png)
